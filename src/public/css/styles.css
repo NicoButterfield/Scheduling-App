@@ -1,0 +1,211 @@
+html {
+    height: 100%;
+    font-family: 'Montserrat';
+  }
+  
+
+  h1
+  {
+    width:70%;
+    text-decoration: underline;
+    font-size: 3.5em;
+    padding-right: .1em;
+    padding-left:1.5em;
+  }
+
+
+  .top
+  {
+    display: flex;
+    width:100%;
+    justify-content: center;
+  }
+
+  #sign_out/*form*/
+  {
+    width:30%;
+    float:right;
+    text-align: center;
+  }
+  
+  
+  #signout /*button*/
+  {
+    float:right;
+    border: black solid 4px;
+    border-radius: 30px;
+    background: rgb(227, 242, 255);
+    margin:3em;
+    padding: .5em;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: 'Montserrat';
+    opacity: 9;
+    transition: .5s;
+    font-weight: bold;
+    
+  }
+
+  #signout:hover
+  {
+    text-decoration:solid;
+    opacity: .7;
+    box-shadow: 0px 3px 1px black;
+
+  }
+
+ 
+
+  body {
+    margin: 0;
+    position: relative;
+    min-height: 100%;
+    height: 100%;
+    background-color: rgb(227, 242, 255);
+  }
+
+  
+  
+  #container button {
+      background:none;
+      border:none;
+      margin:0;
+      padding:0;
+      cursor: pointer;
+      width: 90%;
+      text-align: left;
+      font-size: 3em;
+      font-family: 'Montserrat';
+  }
+
+  #container button:hover {
+    text-decoration: line-through;
+    opacity: .5;
+  }
+  
+  
+
+  #container {
+    height: 100%;
+    width: 100%;
+    display:block;
+  }
+  
+ 
+th
+  {
+    font-size: 2em;
+    text-shadow: 0 2px 2px rgba(0,0,0);
+    position: center;
+    padding: .7em;
+  }
+
+  #todo_table td
+  {
+    font-size: .5em;
+    padding:1em;
+  }
+
+
+
+  table th
+  {
+
+    text-align: center;
+  }
+
+  table
+  {
+    font-size: 1em;
+    width: 82%;
+    height: 100%;
+    background-color: rgb(94, 175, 246);
+    
+    border-radius: 30px;
+    box-shadow: 0px 5px 1px black;
+    border: black solid 2px;
+
+    padding-bottom: 3em;
+  }
+
+
+  #center
+  {
+
+    width: 100%;
+    padding-top: 1em;
+    display: flex;
+    margin-right: 10px;
+    justify-content: center;
+    margin:0;
+/* 
+    height: 100%; */
+  }
+
+ 
+
+  #floater
+  {
+    display: float;
+    width: 100%;
+  }
+
+  #right 
+  {
+    width: 10%;
+    float: right;
+    margin-right: 5em;
+    margin-top: .5em;
+    font-weight: bold;
+  }
+
+  #clear
+  {
+    background-color: white;
+    font-size: 1em;
+    border-radius: 20px;
+    font-weight: bold;
+    border: 4px solid  black;
+    border-color:black;
+    transition: .7s;
+    height: 60px;
+  }
+  
+
+  #clear:hover
+  {
+
+    box-shadow: 0 3px 1px rgba(0,0,0);
+    cursor: pointer;
+  }
+
+  #left input
+  {
+    width: 70%;
+    float: left;
+    margin-left: 10%;
+    border-radius: 10px;
+    border: 1px solid black;
+    box-shadow: 0 5px 1px rgba(0,0,0);
+    height: 45px;
+    padding: 10px;
+  }
+
+  #big
+  {
+    font-size: 1.5em;
+  }
+
+
+
+  ::placeholder
+  {
+    font-family: 'Montserrat';
+  }
+  
+
+  input, select, text
+  {
+    font-family: 'Montserrat';
+    color: #000;
+  }

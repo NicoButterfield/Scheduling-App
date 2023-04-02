@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@500&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../css/styles.css">
+    </head>
+    <body>
+        <header>
+            <div class = "top">
+                 <h1 id = "heading">&nbspSchedule</h1>
+
+                <form id = "sign_out" action="/sign_out" method = "POST">
+                    <button id = "signout" name = "">Sign Out</button>
+                </form>
+            </div>
+            
+        </header>
+        <div id = "container">
+
+            <!--<%- include('components/add_todo'); -%>-->
+
+            <div id = "floater">
+                <div id = "left">
+                    <form id = "add_todo_form" action="/add_todo" method = "POST">
+
+                        <input id = "big" type = "text" name = "add_todo_input" placeholder = "Enter your Schedule"></input>
+                        
+                    </form>
+                </div>
+                <div id = "right">
+                    <form id = "delete_todo_form" action= "/delete_todo" method = "POST">
+                    <input type= "submit" name = "" id = "clear" value = "Clear">
+                </form>
+                </div>
+            </div>
+           
+           
+                
+             <!--<%- include ('components/todo_table'); -%>-->
+            <div id = "center">
+                <table class = "table">
+                    <thead>
+                        <tr>
+                            <th scope = "col"></th>
+                        </tr>
+                    </thead>
+                    <tbody id = "todo_table">
+                
+                    </tbody>
+                
+                    <form id = "complete_todo_form" action= "/complete_todo/" method = "POST">
+                
+                    </form>
+                </table>
+            </div>
+        </div>
+        
+        <footer>
+            
+        </footer>
+        <script src="../js/script.js" charset = "utf-8"></script>
+        <script src="../js/p5.min.js"></script>
+        <script src="../js/animate.js"></script>
+    </body>
+</html>
