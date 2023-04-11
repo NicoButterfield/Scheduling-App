@@ -97,6 +97,13 @@
    opacity: .7;
   }
 
+  #info2
+  {
+    visibility: hidden;
+    color: black;
+  }
+
+
   ::placeholder { 
     color: black;
     opacity: .5;
@@ -108,3 +115,5 @@
     font-family: 'Montserrat';
     color: #000;
   }
+
+

@@ -1,5 +1,7 @@
-get_user();
 get_todos();
+get_user();
+login();
+signup();
 
 function get_todos(){
     var request = new XMLHttpRequest();
@@ -13,14 +15,191 @@ function get_todos(){
     }
 }
 
+// function login()
+// {
+//     var password = document.getElementById("Password");
+//     var username = document.getElementById("Username");
+//     var form = document.getElementById("login_form");
+//     var info = document.getElementById("info");
+    
+//     password.addEventListener("keypress", function(event) 
+//     {
+//         // If the user presses the "Enter" key on the keyboard
+//         if (event.key === "Enter") 
+//         {
+//             form.submit();
+//             // pass = password.value;
+//             // user = username.value;
+//             var request = new XMLHttpRequest();
+//             var requestURL = '/verifyLogin'; 
+//             request.open('GET', requestURL, true);
+//             // request.responseType = 'json';
+//             request.send();
+//             request.onload = function(){
+//                 var check = request.response;
+//                  console.log("2" + check);
+//                 if(check === "Invalid")
+//                 {
+//                     info.style.visibility = "visible";    
+//                     username.value = "";
+//                     password.value = "";
+                               
+//                 }
+//                 else
+//                 {
+//                     info.style.visibility = "hidden";
+//                 }
+//             }
+//             this.blur();  
+            
+//         }
+//         else
+//         {
+//             username.addEventListener('click', function (e) 
+//             {
+                
+//                 info.style.visibility = "hidden";
+//             });
+//         }
+        
+//     });
+// }
+
+
+function signup()
+{
+    
+    var password = document.getElementById("Password");
+    var username = document.getElementById("Username");
+    var info = document.getElementById("info");
+    
+    password.addEventListener("keypress", function(event) 
+    {
+        var verify = true;
+        // If the user presses the "Enter" key on the keyboard
+        if (event.key === "Enter") 
+        {
+            
+            pass = password.value;
+            user = username.value;
+           
+            var request = new XMLHttpRequest();
+            var requestURL = '/get_users'; 
+            request.open('GET', requestURL, true);
+            request.responseType = 'json';
+            request.send();
+            request.onload = function(){
+                var userArray = request.response;
+
+                for(let x = 0; x < userArray.length;x++)
+                {
+                    if(userArray[x].user === user)
+                    {
+                        verify = false;
+                    }
+                }
+
+                if(verify)
+                {
+                    var form = document.getElementById("sign_up_form");
+                    form.submit();
+                    info.innerHTML ="You are now Signed up! Click below to login.";
+                    info.style.visibility = "visible";   
+                    username.value = "";
+                    password.value = "";
+                }
+                else
+                {
+                    info.innerHTML ="Invalid Username or Password.";
+                    info.style.visibility = "visible";    
+                    username.value = "";
+                    password.value = "";
+                }
+            }
+            this.blur();
+        }
+        else
+        {
+            username.addEventListener('click', function (e) 
+            {
+                info.style.visibility = "hidden";
+            });
+        }
+        
+    });
+}
+
+//Combine login and signin functions
+function login()
+{
+    var password = document.getElementById("Password");
+    var username = document.getElementById("Username");
+    var info2 = document.getElementById("info2");
+    
+    password.addEventListener("keypress", function(event) 
+    {
+        // If the user presses the "Enter" key on the keyboard
+        if (event.key === "Enter") 
+        {
+            var verify = false;
+            pass = password.value;
+            user = username.value;
+           
+            var request = new XMLHttpRequest();
+            var requestURL = '/get_users'; 
+            request.open('GET', requestURL, true);
+            request.responseType = 'json';
+            request.send();
+            request.onload = function(){
+                var userArray = request.response;
+
+                for(let x = 0; x < userArray.length;x++)
+                {
+                    if(userArray[x].user === user && userArray[x].pass === pass)
+                    {
+                        verify = true;
+                    }
+                }
+
+                if(verify)
+                {
+                    var form = document.getElementById("login_form");
+                    form.submit();
+                    
+                    info2.style.visibility = "hidden";   
+                    username.value = "";
+                    password.value = "";
+                }
+                else
+                {
+                    info2.style.visibility = "visible";    
+                    username.value = "";
+                    password.value = "";
+                }
+            }
+            this.blur();
+        }
+        else
+        {
+            username.addEventListener('click', function (e) 
+            {
+                info2.style.visibility = "hidden";
+            });
+        }
+        
+    });
+}
+
 function get_user(){
     var request = new XMLHttpRequest();
     var requestURL = '/get_user'; 
     request.open('GET', requestURL);
+    console.log(request.open('GET', requestURL));
     request.responseType = 'json';
     request.send();
     request.onload = function(){
         var username = request.response;
+        console.log(username[0]);
         if(username[0].user != null)
         {
             var str =  document.getElementById("heading");
@@ -31,9 +210,8 @@ function get_user(){
         }
     }
 }
-
-
-    function printTodos(todos){
+ 
+function printTodos(todos){
         var table = document.getElementById("todo_table");
         
         for(var i in todos)
@@ -78,6 +256,3 @@ function get_user(){
         form.action = form.action + todo_id + "/" + todo_complete;
         form.submit();
     }
-  
-
-

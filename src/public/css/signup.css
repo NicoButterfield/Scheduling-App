@@ -95,6 +95,12 @@ main
   font-family: 'Montserrat';
 }
 
+#info
+{
+  visibility: hidden;
+  color: black;
+}
+
 input, select, text
 {
   font-family: 'Montserrat';

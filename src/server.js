@@ -2,10 +2,12 @@ const path = require("path");
 const express = require("express");
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
+const e = require("express");
 const app = express();
 let currentUser = "Temp";
 let currentPassword = "Temp";
 let loggedIn = false;
+let signedIn = false;
 
 
 
@@ -27,8 +29,8 @@ const conn = getConnection();
     express.static(path.join(__dirname, 'public')),
     bodyParser.urlencoded({extended: false}) //Why so important? Paring through html file to append things?
 ];
-app.use(middlewares);
 
+app.use(middlewares);
 
  //Query Database
 app.get('/get_todos', (req, res) => {/*complete = '0' AND*/
@@ -102,38 +104,50 @@ app.post('/login_user', (req, res) =>{
             {
                 currentUser = user;
                 currentPassword = pass;
-
-                app.get('/get_user', (req, res) =>{
-                    const queryString = "SELECT * FROM Users WHERE user = '" + currentUser + "'  AND pass = '" + currentPassword + "'";
-                        conn.query(queryString, (err, rows, fields) =>{
-                            if(err){
-                                
-                            }
-                            else 
-                            {
-                                res.json(rows);
-                            }
-                               
-                        });
-                });
-                console.log("Logged In.");
                 loggedIn = true;
                 res.redirect('/');
+                console.log("Logged In.");
             }
             else
             {
-                console.log( "Login: Invalid username or password");
-                res.redirect('/');
+                loggedIn = false;
+                console.log( "Login: Invalid username or password"); 
+                res.status(204).send();
             }
         })
-
-       
 })
+
+
+app.get('/get_user', (req, res) =>{
+    const queryString = "SELECT * FROM Users WHERE user = '" + currentUser + "'  AND pass = '" + currentPassword + "'";
+        conn.query(queryString, (err, rows, fields) =>{
+            if(err){
+            }
+            else if(rows.length > 0)
+            {
+                res.json(rows);
+            }
+        });
+});
+
+//Comunication with the javascript file (does its own checking there for dom manipulations).
+app.get('/get_users', (req, res) =>{
+    const queryString = "SELECT * FROM Users";
+        conn.query(queryString, (err, rows, fields) =>{
+            if(err){
+            }
+            else if(rows.length > 0)
+            {
+                res.json(rows);
+            }
+        });
+});
 
 
 app.post('/Sign_Up', (req, res) =>{
     const user = req.body.username;
     const pass = req.body.password;
+
     const queryString = "SELECT * FROM Users WHERE user = '" + user + "'"
         conn.query(queryString,[user], (err, rows, fields) =>{
             if(err){
@@ -142,26 +156,23 @@ app.post('/Sign_Up', (req, res) =>{
             else if(rows.length > 0)
             {
                 console.log( "Invalid username or password.");//User already exists
-                res.redirect('/');
+                res.status(204).send();
             }
             else
             {
                 const queryString = "INSERT INTO Users (user, pass) VALUES (?,?)"
                 conn.query(queryString,[user,pass], (err, rows, fields) =>{
                     if(err){
-                        console.log( "Invalid Synax.")
+                        console.log( "Invalid Synax.");
                     }
                     else 
                     {
-                        console.log(currentUser + " signed up.");//Account created
-                        res.redirect('/');
+                        console.log("Signed up");//Account created
+                        res.status(204).send();
                     }
-                       
                 })
             }
         })
-
-       
 })
 
 
